@@ -1,0 +1,48 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "start": "tsc && node dist/app.js",
+    "start:dev": "rimraf dist && tsc && concurrently \"npm run m:run:copy\" \"nodemon app.ts\"",
+    "dev": "nodemon dist/app.js ",
+    "typeorm": "typeorm-ts-node-esm -d ./src/db/data.source.ts",
+    "m:gen": "npm run typeorm migration:generate",
+    "m:run": "npm run typeorm migration:run",
+    "m:run:copy": "cp ./uploads/ ./dist/uploads/ -r"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "5.1.1",
+    "concurrently": "9.1.0",
+    "cors": "2.8.5",
+    "dayjs": "1.11.13",
+    "dotenv": "16.4.5",
+    "express": "4.21.1",
+    "jsonwebtoken": "9.0.2",
+    "memory-cache": "0.2.0",
+    "multer": "1.4.5-lts.1",
+    "mysql": "2.18.1",
+    "reflect-metadata": "0.2.2",
+    "typeorm": "0.3.20",
+    "typeorm-naming-strategies": "4.1.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "0.4.1-nightly.20240914",
+    "@swc/core": "1.7.36",
+    "@types/bcrypt": "5.0.2",
+    "@types/cors": "2.8.17",
+    "@types/express": "5.0.0",
+    "@types/jsonwebtoken": "9.0.7",
+    "@types/memory-cache": "0.2.6",
+    "@types/multer": "1.4.12",
+    "nodemon": "3.1.7",
+    "rimraf": "6.0.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.6.3"
+  }
+}
