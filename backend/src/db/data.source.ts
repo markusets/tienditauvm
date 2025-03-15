@@ -21,6 +21,13 @@ const config: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
+  extra: {
+    connectionLimit: 10, // Evita demasiadas conexiones abiertas
+    queueLimit: 0,
+    acquireTimeout: 10000, // Tiempo de espera antes de fallar la conexión
+  },
 }
+
+console.log(config)
 
 export const initDataSource: DataSource = new DataSource(config)

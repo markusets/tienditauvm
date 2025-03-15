@@ -203,7 +203,7 @@ export default function ProductsTable() {
   const [isViewOpen, setIsViewOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { toast } = useToast();
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 
   const headers = {
     Authorization: `Bearer ${localStorage.getItem('token')}`,

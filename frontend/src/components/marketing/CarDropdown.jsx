@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ShoppingCart, Minus, Plus } from 'lucide-react'
+import { ShoppingCart, Minus, Plus, Send } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -15,7 +15,7 @@ export default function CartDropdown() {
   const { cartItems, totalItems, addToCart, removeFromCart } = useCartStore()
   const [products, setProducts] = useState([])
   const [total, setTotal] = useState(0)
-  const API_URL = import.meta.env.VITE_BACKEND_URL
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -67,6 +67,27 @@ export default function CartDropdown() {
     removeFromCart(productId)
   }
 
+  const generateWhatsAppMessage = () => {
+    let message = "Hola, me gustaría realizar el siguiente pedido:\n\n"
+    
+    products.forEach(product => {
+      const quantity = cartItems[product.id]
+      if (quantity > 0) {
+        message += `• ${quantity}x ${product.productName} - $${(product.price * quantity).toFixed(2)}\n`
+      }
+    })
+    
+    message += `\nTotal: $${total.toFixed(2)}`
+    
+    return encodeURIComponent(message)
+  }
+
+  const handleWhatsAppOrder = () => {
+    const message = generateWhatsAppMessage()
+    const whatsappUrl = `https://api.whatsapp.com/send/?phone=584121988407&text=${message}&type=phone_number&app_absent=0`
+    window.open(whatsappUrl, '_blank')
+  }
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -103,7 +124,7 @@ export default function CartDropdown() {
                     <div key={product.id} className="flex items-center space-x-4">
                       <div className="flex-shrink-0 w-16 h-16">
                         <img
-                          src={product.urlPhoto || '/placeholder.svg?height=64&width=64'}
+                          src={`${API_URL}${product.urlPhoto}` || '/placeholder.svg?height=64&width=64'}
                           alt={product.productName}
                           className="w-full h-full object-cover rounded"
                         />
@@ -138,8 +159,16 @@ export default function CartDropdown() {
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
-                <Button className="w-full">
-                  Ver carrito
+                <Button className="w-full bg-green-600 hover:bg-green-700 " onClick={handleWhatsAppOrder} >
+                  <Send className="h-4 w-4" />
+                  Ordenar por WhatsApp
+                </Button>
+                <Button 
+                  className="w-full bg-green-600 hover:bg-green-700 flex items-center justify-center gap-2"
+                  onClick={handleWhatsAppOrder}
+                >
+                  <Send className="h-4 w-4" />
+                  Ordenar por WhatsApp
                 </Button>
               </div>
             </>

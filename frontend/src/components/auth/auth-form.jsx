@@ -14,7 +14,7 @@ export default function AuthForms() {
   const { toast } = useToast()
   const { setRole } = useRoleStore()
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL
 
   const [loginData, setLoginData] = useState({
     email: '',

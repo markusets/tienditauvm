@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('cuenta')
   const [profile, setProfile] = useState({})
   const { role, setRole } = useRoleStore()
-  const API_URL = import.meta.env.VITE_BACKEND_URL
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
     getProfile()

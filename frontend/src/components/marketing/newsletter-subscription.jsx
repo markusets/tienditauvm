@@ -8,7 +8,7 @@ export default function NewsletterSubscription() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast();
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -136,7 +136,7 @@ export default function UsersTable() {
   const [isViewOpen, setIsViewOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
   const { toast } = useToast()
-  const API_URL = import.meta.env.VITE_BACKEND_URL
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 
   const headers = {
     'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ export default function ModernNavbar() {
   const searchRef = useRef(null)
   const { totalItems } = useCartStore()
   const { toast } = useToast();
-  const API_URL = import.meta.env.VITE_BACKEND_URL
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 
   const navigate = useNavigate()
 
@@ -114,7 +114,7 @@ export default function ModernNavbar() {
               </div>
             </div>
             {isSearchOpen && (
-              <Card className="absolute top-full left-0 right-0 mt-1 max-h-60 overflow-auto z-50">
+              <Card className="absolute top-full left-0 right-0 mt-1 max-h-60 overflow-auto z-10">
                 <CardContent className="p-2">
                   {isLoading ? (
                     <div className="flex justify-center items-center p-4">

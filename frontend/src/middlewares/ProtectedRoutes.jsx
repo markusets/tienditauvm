@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   const userRole = useRoleStore((state) => state.role);
 
   if (!userRole) {
-    // Si no hay un rol (usuario no autenticado), redirige al login
+
     return <Navigate to="/auth" replace />;
   }
 

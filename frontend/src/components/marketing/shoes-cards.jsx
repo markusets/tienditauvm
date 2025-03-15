@@ -10,7 +10,7 @@ export default function ShoesCollectionTop() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const { addToCart, cartItems, totalItems } = useCartStore()
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,7 +47,7 @@ export default function ShoesCollectionTop() {
           {products.map((product) => (
             <Card key={product.id} className="overflow-hidden transition-shadow duration-300 ease-in-out hover:shadow-lg">
               <div className="relative">
-                <img src={product.urlPhoto} alt={product.productName} className="w-full h-64 object-cover" />
+                <img src={`${API_URL}${product.urlPhoto}`} alt={product.productName} className="w-full h-64 object-cover" />
                 <Badge className="absolute top-2 right-2 bg-[#88BD2D]">Nuevo</Badge>
               </div>
               <CardContent className="p-4">

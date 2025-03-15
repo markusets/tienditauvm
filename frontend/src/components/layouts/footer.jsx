@@ -67,7 +67,7 @@ export default function Footer() {
             <a href="#" className="text-sm text-gray-500 hover:text-gray-900">Terms & Conditions</a>
             <a href="#" className="text-sm text-gray-500 hover:text-gray-900">CA Supply Chains Act</a>
           </div>
-          <p className="text-gray-500">&copy; 2024 La tienditaUVM All rights reserved.</p>
+          <p className="text-gray-500">&copy; 2024 Sofia & Juan. All rights reserved.</p>
         </div>
       </div>
     </footer>

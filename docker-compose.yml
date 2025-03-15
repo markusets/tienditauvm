@@ -1,0 +1,118 @@
+
+services:
+  # === Servicios de Backend ===
+  service_db:
+    image: mysql:5.7
+    volumes:
+      - ./backend/src/mysql_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/src/mysql_init/storeuvm_db.sql:/docker-entrypoint-initdb.d/storeuvm_db.sql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: storeuvm_db
+      MYSQL_ROOT_USER: uadmin
+      MYSQL_USER: uadmin
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    profiles: [api-uvm, full-stack]
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+    profiles: [full-stack]  
+    networks:
+      - app-network
+
+  api_store_uvm:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./backend/uploads:/app/uploads
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=service_db
+      - DB_PORT=3306
+      - DB_USER=uadmin
+      - DB_PASSWORD=secret
+      - DB_DATABASE=storeuvm_db
+      - JWT_SECRET=storeuvm@2024
+    env_file: ./backend/.env
+    depends_on:
+      - service_db
+    profiles: [api-uvm, full-stack]
+    networks:
+      - app-network
+
+  api_store_uvm_prod:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_HOST=service_db
+      - DB_PORT=3306
+      - DB_USER=uadmin
+      - DB_PASSWORD=secret
+      - DB_DATABASE=storeuvm_db
+      - JWT_SECRET=storeuvm@2024
+    env_file: ./backend/.env
+    depends_on:
+      - service_db
+    profiles: [api-uvm-prod, full-stack-prod]
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # === Servicios de Frontend ===
+  frontend_dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=development
+      - VITE_PUBLIC_BACKEND_URL=http://localhost:8080      
+    profiles: [frontend-dev, full-stack]
+    depends_on:
+      - api_store_uvm
+    networks:
+      - app-network
+
+  frontend_prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=domain.com
+    depends_on:
+      - api_store_uvm_prod
+    profiles: [frontend-prod, full-stack-prod]
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
