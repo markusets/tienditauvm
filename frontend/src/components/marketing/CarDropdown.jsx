@@ -112,9 +112,6 @@ export default function CartDropdown() {
                 <ShoppingCart className="h-8 w-8 text-gray-400" />
               </div>
               <p className="text-lg font-medium">Tu carrito esta vacio</p>
-              <Button className="w-full max-w-xs bg-blue-500 hover:bg-blue-600">
-                Compra nuestros productos
-              </Button>
             </div>
           ) : (
             <>

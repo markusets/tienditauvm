@@ -136,7 +136,7 @@ const ProductForm = ({ product, onSubmit, categories }) => {
       </div>
 
       <div>
-        <Label htmlFor="price">Pricio</Label>
+        <Label htmlFor="price">Precio</Label>
         <Input
           id="price"
           name="price"

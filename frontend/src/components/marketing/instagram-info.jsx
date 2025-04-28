@@ -19,10 +19,17 @@ export default function InstagramInfo() {
             <p className="text-gray-600 mb-6">
               Síguenos en Instagram y etiquétanos para aparecer en nuestro timeline
             </p>
+            <a
+              href="https://www.instagram.com/latienditauvm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center"
+           >
             <Button className="inline-flex items-center">
-              <Instagram className="mr-2 h-4 w-4" />
-              @latienditauvm
+            <Instagram className="mr-2 h-4 w-4" />
+            @latienditauvm
             </Button>
+          </a>
           </div>
           <div className="lg:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-4">
             {images.map((image, index) => (

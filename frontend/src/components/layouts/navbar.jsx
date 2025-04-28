@@ -20,7 +20,7 @@ export default function ModernNavbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const debouncedSearchTerm = useDebounce(searchTerm, 1000)
   const searchRef = useRef(null)
-  const { totalItems } = useCartStore()
+  const { totalItems, addToCart } = useCartStore() 
   const { toast } = useToast();
   const API_URL = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 
@@ -28,6 +28,16 @@ export default function ModernNavbar() {
 
   const handleAuthClick = () => {
     navigate('/auth')
+  }
+
+  const handleProductClick = (product) => {
+    addToCart(product.id) 
+    toast({
+      title: 'Producto agregado al carrito',
+      description: `${product.productName} ha sido agregado al carrito.`,
+      variant: "success",
+      style: { backgroundColor: '#88BD2D', color: '#ffffff' },
+    })
   }
 
   useEffect(() => {
@@ -122,7 +132,11 @@ export default function ModernNavbar() {
                     </div>
                   ) : searchResults.length > 0 ? (
                     searchResults.map((product) => (
-                      <div key={product.id} className="p-2 hover:bg-gray-100 cursor-pointer">
+                      <div
+                        key={product.id}
+                        className="p-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleProductClick(product)} 
+                      >
                         <p className="font-medium">{product.productName}</p>
                         <p className="text-sm text-gray-500">${product.price.toFixed(2)}</p>
                       </div>
@@ -138,7 +152,7 @@ export default function ModernNavbar() {
           <div className="hidden sm:flex sm:items-center">
             <Button variant="link" onClick={handleAuthClick} >
               <User className="h-6 w-6 bg-white" />
-              <span className="ml-2 text-white">Inicia | Unete</span>
+              <span className="ml-2 text-white">Sesion de Administración</span>
             </Button>
             <CartDropdown />
           </div>
@@ -180,7 +194,11 @@ export default function ModernNavbar() {
                     </div>
                   ) : searchResults.length > 0 ? (
                     searchResults.map((product) => (
-                      <div key={product.id} className="p-2 hover:bg-gray-100 cursor-pointer">
+                      <div
+                        key={product.id}
+                        className="p-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleProductClick(product)} 
+                      >
                         <p className="font-medium">{product.productName}</p>
                         <p className="text-sm text-gray-500">${product.price.toFixed(2)}</p>
                       </div>

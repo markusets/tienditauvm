@@ -70,13 +70,6 @@ export default function NewsletterSubscription() {
             {isLoading ? 'Subscribiendo...' : 'Subscribete'}
           </Button>
         </form>
-        <p className="mt-4 text-sm text-gray-600">
-          Nos importan sus datos. Lea nuestra{' '}
-          <a href="#" className="text-indigo-600 hover:underline">
-            política de privacidad
-          </a>
-          .
-        </p>
       </div>
     </div>
   );

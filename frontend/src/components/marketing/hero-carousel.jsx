@@ -8,20 +8,20 @@ export default function HeroCarousel() {
   const slides = [
     {
       id: 1,
-      title: "FRANELAS DAMAS",
-      subtitle: "Collection 2024",
+      title: "FRANELAS",
+      subtitle: "Top Collection",
       image: "slide_girl.webp?height=600&width=1200",
     },
     {
       id: 2,
       title: "ACCESORIOS",
-      subtitle: "UNISEX",
+      subtitle: "Unisex",
       image: "slide_boy.webp?height=600&width=1200",
     },
     {
       id: 3,
       title: "REGALA IDENTIDAD",
-      subtitle: "OBSEQUIOS UVM",
+      subtitle: "Obsequios UVM",
       image: "gift_father.webp?height=600&width=1200",
     },
   ]

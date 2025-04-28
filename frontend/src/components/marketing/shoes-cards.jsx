@@ -48,7 +48,7 @@ export default function ShoesCollectionTop() {
             <Card key={product.id} className="overflow-hidden transition-shadow duration-300 ease-in-out hover:shadow-lg">
               <div className="relative">
                 <img src={`${API_URL}${product.urlPhoto}`} alt={product.productName} className="w-full h-64 object-cover" />
-                <Badge className="absolute top-2 right-2 bg-[#88BD2D]">Nuevo</Badge>
+                <Badge className="absolute top-2 right-2 bg-[#88BD2D]"></Badge>
               </div>
               <CardContent className="p-4">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.productName}</h3>
