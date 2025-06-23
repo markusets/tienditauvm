@@ -8,21 +8,39 @@ export default function HeroCarousel() {
   const slides = [
     {
       id: 1,
-      title: "FRANELAS",
-      subtitle: "Top Collection",
-      image: "slide_girl.webp?height=600&width=1200",
+      title: "ESTAMPADO UVM",
+      subtitle: "Personalización y calidad en cada prenda",
+      image: "foto1.webp?height=600&width=1200",
     },
     {
       id: 2,
-      title: "ACCESORIOS",
-      subtitle: "Unisex",
-      image: "slide_boy.webp?height=600&width=1200",
+      title: "ENTREGA CON IDENTIDAD",
+      subtitle: "Recibe tu prenda personalizada",
+      image: "foto2.webp?height=600&width=1200",
     },
     {
       id: 3,
-      title: "REGALA IDENTIDAD",
-      subtitle: "Obsequios UVM",
-      image: "gift_father.webp?height=600&width=1200",
+      title: "DETALLES QUE UNEN",
+      subtitle: "Sorprende con artículos UVM exclusivos",
+      image: "foto3.webp?height=600&width=1200",
+    },
+    {
+      id: 4,
+      title: "TAZAS PERSONALIZADAS",
+      subtitle: "Luce tu identidad con estilo",
+      image: "foto4.webp?height=600&width=1200",
+    },
+    {
+      id: 5,
+      title: "ORGANIZA TUS IDEAS",
+      subtitle: "Creatividad UVM contigo",
+      image: "foto5.webp?height=600&width=1200",
+    },
+    {
+      id: 6,
+      title: "FRANELAS",
+      subtitle: "Lleva tu estilo UVM a todas partes",
+      image: "foto6.webp?height=600&width=1200",
     },
   ]
 
@@ -59,7 +77,7 @@ export default function HeroCarousel() {
               alt={slide.title}
               className="object-cover w-screen h-full"
             />
-            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
               <h2 className="text-5xl font-bold mb-4">{slide.title}</h2>
               <p className="text-xl">{slide.subtitle}</p>

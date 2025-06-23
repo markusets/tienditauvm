@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
 
-import logo from '@/assets/tiendita-logo-uvm.jpg'
+import logo from '@/assets/tiendita-logo-uvmP2.png'
 
 export default function ShoesHero() {
   return (

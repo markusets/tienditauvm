@@ -116,7 +116,7 @@ export default function ModernNavbar() {
                   id="search"
                   name="search"
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                  placeholder="Search products"
+                  placeholder="Buscar productos"
                   type="search"
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -179,7 +179,7 @@ export default function ModernNavbar() {
               </div>
               <Input
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500 text-sm"
-                placeholder="Search products"
+                placeholder="Buscar productos"
                 type="search"
                 value={searchTerm}
                 onChange={handleSearchChange}
@@ -214,7 +214,7 @@ export default function ModernNavbar() {
             <div className="flex items-center px-5">
               <Button variant="default" onClick={handleAuthClick} >
                 <User className="h-6 w-6 bg-black" />
-                <span className="ml-2 text-white">Inicia | Unete</span>
+                <span className="ml-2 text-white">Sesion de Administración</span>
               </Button>
 
               <CartDropdown />
