@@ -5,7 +5,7 @@ services:
       - ./src/mysql_init/init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --init-file /docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3306:3306"
+      - "3310:3306"
     environment:
       MYSQL_DATABASE: storeuvm_db
       MYSQL_ROOT_USER: uadmin
@@ -17,4 +17,4 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8090:8080

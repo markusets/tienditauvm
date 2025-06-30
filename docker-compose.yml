@@ -7,7 +7,7 @@ services:
       - ./backend/src/mysql_init/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./backend/src/mysql_init/storeuvm_db.sql:/docker-entrypoint-initdb.d/storeuvm_db.sql
     ports:
-      - "3306:3306"
+      - "3310:3306"
     environment:
       MYSQL_DATABASE: storeuvm_db
       MYSQL_ROOT_USER: uadmin
@@ -22,7 +22,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8090:8080
+      - 8091:8080
     profiles: [full-stack]  
     networks:
       - app-network
@@ -85,7 +85,7 @@ services:
       dockerfile: Dockerfile
       target: development
     ports:
-      - "8080:80"
+      - "8088:80"
     environment:
       - NODE_ENV=development
       - VITE_PUBLIC_BACKEND_URL=http://localhost:8080      
