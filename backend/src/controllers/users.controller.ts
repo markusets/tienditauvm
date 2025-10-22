@@ -73,6 +73,51 @@ export class UsersController {
     return
   }
 
+  static async changePassword(req: Request, res: Response): Promise<void> {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      const currentUserId = req['currentUser'].id;
+
+      if (!currentPassword || !newPassword) {
+        res.status(400).json({
+          message: "Current password and new password are required"
+        });
+        return;
+      }
+
+      const userRepository = initDataSource.getRepository(User);
+      const user = await userRepository.findOne({
+        where: { id: currentUserId },
+      });
+
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
+      // Verificar la contraseña actual
+      const isPasswordValid = await encrypt.comparepassword(user.password, currentPassword);
+      if (!isPasswordValid) {
+        res.status(400).json({ message: "Current password is incorrect" });
+        return;
+      }
+
+      // Actualizar la contraseña
+      user.password = await encrypt.encryptpass(newPassword);
+      await userRepository.save(user);
+
+      res.status(200).json({
+        status: true,
+        message: "Password changed successfully"
+      });
+      return;
+    } catch (error) {
+      console.error("Error changing password:", error);
+      res.status(500).json({ message: "Internal server error" });
+      return;
+    }
+  }
+
   static async updateUser(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const { name, lastname, email, password, role } = req.body;
@@ -93,14 +138,21 @@ export class UsersController {
     }
 
     if (req['currentUser'].role === "admin") {
-      if (user.role !== "admin") {
-        user.role = role;
-      } else {
+      // Un admin puede actualizar cualquier usuario
+      // Pero no puede cambiar el rol de otro admin (incluyendo el suyo propio)
+      if (user.role === "admin" && role !== "admin") {
         res.status(403).
-          json({ message: "You cannot change the role of another admin." });
+          json({ message: "You cannot change the role of an admin." });
         return
       }
+      // Si es un usuario regular, se puede cambiar su rol
+      if (user.role !== "admin") {
+        user.role = role;
+      }
+      // Si es admin y no se está intentando cambiar el rol, continuar
+      // Esto permite que un admin cambie su propia contraseña
     } else {
+      // Si no es admin, no puede actualizar usuarios
       res.status(403).
         json({ message: "You do not have permission to perform this action." });
       return

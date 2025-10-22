@@ -20,8 +20,8 @@ function App() {
         <Route path="/" element={
           <>
             <ModernNavbar />
-            <ShoesHero />
             <HeroCarousel />
+            <ShoesHero />
             <ShoesCollectionTop />
             <InstagramInfo />
             <MissionVision />

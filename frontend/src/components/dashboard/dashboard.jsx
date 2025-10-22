@@ -12,9 +12,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Package, Users, LayoutDashboard, LogOut } from 'lucide-react'
+import { Package, Users, LayoutDashboard, LogOut, Lock } from 'lucide-react'
 import ProductsTable from './ProductsTable'
 import UsersTable from './UsersTable'
+import ChangePassword from './ChangePassword'
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('cuenta')
@@ -109,6 +110,15 @@ export default function Dashboard() {
                   </SidebarMenuItem>
                 </>
               )}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  onClick={() => setActiveSection('seguridad')}
+                  isActive={activeSection === 'seguridad'}
+                >
+                  <Lock className="size-4" />
+                  <span>Cambiar Contraseña</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
           <SidebarFooter>
@@ -135,6 +145,7 @@ export default function Dashboard() {
             {activeSection === 'cuenta' && <div>Cuenta</div>}
             {activeSection === 'productos' && role === 'admin' && <ProductsTable />}
             {activeSection === 'usuarios' && role === 'admin' && <UsersTable />}
+            {activeSection === 'seguridad' && <ChangePassword />}
           </main>
         </SidebarInset>
       </div>

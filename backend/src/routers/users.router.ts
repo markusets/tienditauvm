@@ -19,6 +19,12 @@ Router.get(
 Router.post("/signup", UsersController.signup);
 Router.post("/login", AuthController.login);
 Router.put(
+  "/change-password",
+  authentification,
+  authorization(["admin", "user"]),
+  UsersController.changePassword
+);
+Router.put(
   "/users/:id",
   authentification,
   authorization(["admin"]),

@@ -2,9 +2,6 @@ services:
   service_db:
     image: mysql:5.7
     volumes:
-      # Volumen persistente para datos de MySQL
-      - mysql_data:/var/lib/mysql
-      # Script de inicialización
       - ./src/mysql_init/init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --init-file /docker-entrypoint-initdb.d/init.sql
     ports:
@@ -21,8 +18,3 @@ services:
     restart: always
     ports:
       - 8090:8080
-
-# Volúmenes persistentes
-volumes:
-  mysql_data:
-    driver: local

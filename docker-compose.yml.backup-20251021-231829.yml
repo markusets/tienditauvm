@@ -4,9 +4,6 @@ services:
   service_db:
     image: mysql:5.7
     volumes:
-      # Volumen persistente para datos de MySQL - NO se pierde al hacer down
-      - mysql_data:/var/lib/mysql
-      # Scripts de inicialización (solo se ejecutan si la BD está vacía)
       - ./backend/src/mysql_init/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./backend/src/mysql_init/storeuvm_db.sql:/docker-entrypoint-initdb.d/storeuvm_db.sql
     ports:
@@ -118,9 +115,4 @@ services:
 networks:
   app-network:
     driver: bridge
-
-# Volúmenes persistentes - Los datos se mantienen aunque hagas docker-compose down
-volumes:
-  mysql_data:
-    driver: local
 
