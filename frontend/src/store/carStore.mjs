@@ -29,8 +29,20 @@ export const useCartStore = create((set) => ({
   clearCart: () => set({ cartItems: {}, totalItems: 0 })
 }))
 
+const getRoleFromToken = () => {
+  try {
+    const token = localStorage.getItem('token')
+    if (!token) return ''
+    const payload = JSON.parse(atob(token.split('.')[1]))
+    if (payload.exp * 1000 < Date.now()) return ''
+    return payload.role || ''
+  } catch {
+    return ''
+  }
+}
+
 export const useRoleStore = create((set) => ({
-  role: '',
+  role: getRoleFromToken(),
   setRole: async (newRole) => set({ role: newRole })
 }))
 

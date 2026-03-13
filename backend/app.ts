@@ -11,6 +11,7 @@ import {
 import { productRouter } from './src/routers/products.router';
 import { categoryRouter } from './src/routers/categories.router';
 import { subscriptionNewsRouter } from './src/routers/subscription.news.router';
+import { clientsRouter } from './src/routers/clients.router';
 import { initDataSource } from './src/db/data.source';
 
 config();
@@ -39,6 +40,7 @@ app.use('/api', userRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', subscriptionNewsRouter);
+app.use('/api', clientsRouter);
 
 initDataSource.initialize()
   .then(async () => {
