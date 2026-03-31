@@ -25,6 +25,33 @@ export class ClientsController {
     return balance;
   }
 
+  // ==================== CONSULTA PUBLICA ====================
+
+  static async lookupByCedula(req: Request, res: Response) {
+    try {
+      const { cedula } = req.body;
+      if (!cedula || typeof cedula !== 'string' || !cedula.trim()) {
+        res.status(400).json({ status: false, message: "La cedula es requerida" });
+        return
+      }
+
+      const clientRepository = initDataSource.getRepository(ClientEntity);
+      const client = await clientRepository.findOne({ where: { cedula: cedula.trim() } });
+
+      if (!client) {
+        res.status(404).json({ status: false, message: "No se encontro un cliente con esta cedula" });
+        return
+      }
+
+      res.status(200).json({ status: true, data: { nombre: client.nombre, balance: client.balance } });
+      return
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ status: false, message: "Error al consultar el saldo" });
+      return
+    }
+  }
+
   // ==================== CLIENTES ====================
 
   static async getClients(req: Request, res: Response) {

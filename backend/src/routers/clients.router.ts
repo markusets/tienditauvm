@@ -4,6 +4,9 @@ import { authentification, authorization } from "../middlewares/auth.middleware"
 
 const router = Router();
 
+// Consulta publica (sin auth)
+router.post('/clients/lookup', ClientsController.lookupByCedula);
+
 // Client CRUD
 router.get('/clients',
   authentification,

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, User, Menu, Loader2 } from 'lucide-react'
+import { Search, User, Menu, Loader2, Wallet } from 'lucide-react'
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -150,6 +150,10 @@ export default function ModernNavbar() {
           </div>
 
           <div className="hidden sm:flex sm:items-center">
+            <Button variant="link" onClick={() => navigate('/consulta-saldo')}>
+              <Wallet className="h-5 w-5 text-white" />
+              <span className="ml-2 text-white">Consulta de Saldo</span>
+            </Button>
             <Button variant="link" onClick={handleAuthClick} >
               <User className="h-6 w-6 bg-white" />
               <span className="ml-2 text-white">Sesion de Administración</span>
@@ -211,13 +215,18 @@ export default function ModernNavbar() {
             )}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">
-            <div className="flex items-center px-5">
-              <Button variant="default" onClick={handleAuthClick} >
-                <User className="h-6 w-6 bg-black" />
-                <span className="ml-2 text-white">Sesion de Administración</span>
+            <div className="flex flex-col gap-2 px-5">
+              <Button variant="default" onClick={() => { navigate('/consulta-saldo'); setIsMenuOpen(false); }}>
+                <Wallet className="h-5 w-5" />
+                <span className="ml-2 text-white">Consulta de Saldo</span>
               </Button>
-
-              <CartDropdown />
+              <div className="flex items-center">
+                <Button variant="default" onClick={handleAuthClick} >
+                  <User className="h-6 w-6 bg-black" />
+                  <span className="ml-2 text-white">Sesion de Administración</span>
+                </Button>
+                <CartDropdown />
+              </div>
             </div>
           </div>
         </div>

@@ -386,6 +386,14 @@ export default function ClientsTable() {
     fetchClients();
   }, []);
 
+  // Sincronizar selectedClient cuando clients se actualiza (ej: después de una transacción)
+  useEffect(() => {
+    if (selectedClient) {
+      const updated = clients.find(c => c.id === selectedClient.id);
+      if (updated) setSelectedClient(updated);
+    }
+  }, [clients]);
+
   const fetchClients = async () => {
     try {
       const response = await fetch(`${API_URL}/api/clients`, { headers });

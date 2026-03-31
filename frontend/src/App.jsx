@@ -8,6 +8,7 @@ import { Toaster } from '@/components/customs/toast-container.jsx'
 import HeroCarousel from '@/components/marketing/hero-carousel.jsx'
 import NewsletterSubscription from '@/components/marketing/newsletter-subscription.jsx'
 import MissionVision from '@/components/marketing/mission-vision.jsx'
+import ConsultaSaldo from '@/components/marketing/consulta-saldo.jsx'
 import AuthForms from '@/components/auth/auth-form.jsx'
 import Dashboard from '@/components/dashboard/dashboard.jsx'
 import ProtectedRoute from '@/middlewares/ProtectedRoutes.jsx'
@@ -30,6 +31,14 @@ function App() {
           </>
         } />
 
+
+        <Route path="/consulta-saldo" element={
+          <>
+            <ModernNavbar />
+            <ConsultaSaldo />
+            <Footer />
+          </>
+        } />
 
         <Route path="/auth" element={<AuthForms />} />
         <Route
